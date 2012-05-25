@@ -1,3 +1,3 @@
-This **spring-security-oauth-client-demo** is demo webapp to test the "spring-security-oauth-client library":https://github.com/leleuj/spring-security-oauth-client with Facebook.
+This **spring-security-oauth-client-demo** is a demo webapp to test the "spring-security-oauth-client library":https://github.com/leleuj/spring-security-oauth-client with Facebook.
 
 Start the demo webapp on http://localhost:8080/, access the protected/index.jsp url, be redirected to Facebook, log in at Facebook and be redirected back to the application authenticated and with a complete user profile.
