@@ -5,4 +5,13 @@
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <bean id="servletContextAttributeExporter" class="org.springframework.web.context.support.ServletContextAttributeExporter">
+        <property name="attributes">
+            <map>
+                <entry key="facebookProvider" value-ref="facebookProvider" />
+                <entry key="twitterProvider" value-ref="twitterProvider" />
+            </map>
+        </property>
+    </bean>
+
 </beans>
