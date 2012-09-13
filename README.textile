@@ -1,3 +1,21 @@
-This **spring-security-oauth-client-demo** is a demo webapp to test the "spring-security-oauth-client library":https://github.com/leleuj/spring-security-oauth-client with Facebook and Twitter.
+h2. What is this project ?
 
-Start the demo webapp on http://localhost:8080/, access the protected/index.jsp url, be redirected to Facebook, log in at Facebook and be redirected back to the application authenticated and with a complete user profile. Or click on "Authenticate at Twitter"...
+This *spring-security-oauth-client-demo* project is a demo webapp to test the "spring-security-oauth-client library":https://github.com/leleuj/spring-security-oauth-client with Facebook and Twitter.
+The *spring-security-oauth-client* library is built to delegate authentication to an OAuth provider and be authenticated back in the protected application with a complete user profile retrieved from the OAuth provider.
+
+h2. Quick start & test 
+
+To start quickly, build the project :<pre><code>cd spring-security-oauth-client-demo
+mvn clean install jetty:run</code></pre>
+
+To test,
+- call the "http://localhost:8080/protected/index.jsp":http://localhost:8080/protected/index.jsp url
+- be sent to Facebook and log in
+- be redirected back to the application, authenticated and with a complete user profile
+
+Or click on "Authenticate at Twitter" link to authenticate at Twitter...
+
+h2. Manual deployment
+
+You can also deploy manually this web application in your favorite web applications server :
+- spring-security-oauth-client-demo on http://localhost:8080/
