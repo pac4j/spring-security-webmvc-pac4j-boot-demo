@@ -5,15 +5,15 @@ The *spring-security-oauth-client* library is built to delegate authentication t
 
 h2. Quick start & test 
 
-To start quickly, build the project :<pre><code>cd spring-security-oauth-client-demo
+To start quickly, build the project and launch the web app with jetty :<pre><code>cd spring-security-oauth-client-demo
 mvn clean install jetty:run</code></pre>
 
 To test,
 - call the "http://localhost:8080/protected/index.jsp":http://localhost:8080/protected/index.jsp url
 - be sent to Facebook and log in
-- be redirected back to the application, authenticated and with a complete user profile
+- be redirected back to the application, authenticated and with a complete user profile.
 
-Or click on "Authenticate at Twitter" link to authenticate at Twitter...
+Or click on the "Authenticate at Twitter" link to authenticate at Twitter...
 
 h2. Manual deployment
 
