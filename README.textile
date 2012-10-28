@@ -1,6 +1,6 @@
 h2. What is this project ?
 
-This *spring-security-oauth-client-demo* project is a demo webapp to test the "spring-security-oauth-client library":https://github.com/leleuj/spring-security-oauth-client with Facebook and Twitter.
+This *spring-security-oauth-client-demo* project is a demo webapp to test the "spring-security-oauth-client library":https://github.com/leleuj/spring-security-oauth-client *version >= 1.1.0* with Facebook and Twitter.
 The *spring-security-oauth-client* library is built to delegate authentication to an OAuth provider and be authenticated back in the protected application with a complete user profile retrieved from the OAuth provider.
 
 h2. Quick start & test 

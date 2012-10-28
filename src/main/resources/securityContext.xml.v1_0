@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="facebookAuthProvider" />
+        <security:authentication-provider ref="twitterAuthProvider" />
+    </security:authentication-manager>
+
+    <security:http entry-point-ref="facebookEntryPoint">
+        <security:custom-filter before="CAS_FILTER" ref="facebookFilter" />
+        <security:custom-filter after="CAS_FILTER" ref="twitterFilter" />
+        <security:intercept-url pattern="/protected/*" access="IS_AUTHENTICATED_FULLY" />
+        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:logout />
+    </security:http>
+
+    <!-- ######################### FACEBOOK ######################### -->
+    <bean id="facebookEntryPoint" class="com.github.leleuj.ss.oauth.client.web.OAuthAuthenticationEntryPoint">
+        <property name="provider" ref="facebookProvider" />
+    </bean>
+
+    <bean id="facebookProvider" class="org.scribe.up.provider.impl.FacebookProvider">
+        <property name="key" value="318531508227494" />
+        <property name="secret" value="e3f38cfc72bb63e35641b637081a6177" />
+        <property name="callbackUrl" value="http://localhost:8080/j_spring_facebook_security_check" />
+    </bean>
+
+    <bean id="facebookFilter" class="com.github.leleuj.ss.oauth.client.web.OAuthAuthenticationFilter">
+        <constructor-arg index="0" value="/j_spring_facebook_security_check" />
+        <property name="provider" ref="facebookProvider" />
+        <property name="authenticationManager" ref="authenticationManager" />
+    </bean>
+
+    <bean id="facebookAuthProvider" class="com.github.leleuj.ss.oauth.client.authentication.OAuthAuthenticationProvider">
+        <property name="provider" ref="facebookProvider" />
+    </bean>
+
+    <!-- ######################### TWITTER ######################### -->
+    <bean id="twitterProvider" class="org.scribe.up.provider.impl.TwitterProvider">
+        <property name="key" value="PEVtidSG0HzSrxVRPpsCXw" />
+        <property name="secret" value="mC0HOvxiEgqwdDWCcDoy3q75nUQPu1bYRp1ncHWGd0" />
+        <property name="callbackUrl" value="http://localhost:8080/j_spring_twitter_security_check" />
+    </bean>
+
+    <bean id="twitterFilter" class="com.github.leleuj.ss.oauth.client.web.OAuthAuthenticationFilter">
+        <constructor-arg index="0" value="/j_spring_twitter_security_check" />
+        <property name="provider" ref="twitterProvider" />
+        <property name="authenticationManager" ref="authenticationManager" />
+    </bean>
+
+    <bean id="twitterAuthProvider" class="com.github.leleuj.ss.oauth.client.authentication.OAuthAuthenticationProvider">
+        <property name="provider" ref="twitterProvider" />
+    </bean>
+</beans>
