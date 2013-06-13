@@ -8,8 +8,12 @@
     <bean id="servletContextAttributeExporter" class="org.springframework.web.context.support.ServletContextAttributeExporter">
         <property name="attributes">
             <map>
-                <entry key="facebookProvider" value-ref="facebookProvider" />
-                <entry key="twitterProvider" value-ref="twitterProvider" />
+                <entry key="FacebookClient" value-ref="facebookClient" />
+                <entry key="TwitterClient" value-ref="twitterClient" />
+                <entry key="FormClient" value-ref="formClient" />
+                <entry key="BasicAuthClient" value-ref="basicAuthClient" />
+                <entry key="CasClient" value-ref="casClient" />
+                <entry key="MyOpenIdClient" value-ref="myOpenIdClient" />
             </map>
         </property>
     </bean>

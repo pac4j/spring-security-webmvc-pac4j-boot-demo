@@ -6,49 +6,117 @@
           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider ref="oAuthProvider" />
+        <security:authentication-provider ref="clientProvider" />
     </security:authentication-manager>
 
-    <security:http entry-point-ref="facebookEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="oAuthFilter" />
-        <security:intercept-url pattern="/protected/*" access="IS_AUTHENTICATED_FULLY" />
+	<!-- urls and security configuration -->
+    <security:http pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/facebook/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
+    <security:http pattern="/twitter/**" entry-point-ref="twitterEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/twitter/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
+    <security:http pattern="/form/**" entry-point-ref="formEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/form/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
+    <security:http pattern="/basicauth/**" entry-point-ref="basicAuthEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/basicauth/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
+    <security:http pattern="/cas/**" entry-point-ref="casEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/cas/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
+    <security:http pattern="/**" entry-point-ref="myOpenIdEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/myopenid/**" access="IS_AUTHENTICATED_FULLY" />
         <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:logout />
     </security:http>
 
-    <!-- ######################### PROVIDERS ######################### -->
-    <bean id="facebookProvider" class="org.scribe.up.provider.impl.FacebookProvider">
-        <property name="key" value="318531508227494" />
-        <property name="secret" value="e3f38cfc72bb63e35641b637081a6177" />
-    </bean>
-    
-    <bean id="twitterProvider" class="org.scribe.up.provider.impl.TwitterProvider">
-        <property name="key" value="PEVtidSG0HzSrxVRPpsCXw" />
-        <property name="secret" value="mC0HOvxiEgqwdDWCcDoy3q75nUQPu1bYRp1ncHWGd0" />
+	<!-- entry points -->
+    <bean id="facebookEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="facebookClient" />
     </bean>
 
-    <bean id="providersDefinition" class="org.scribe.up.provider.ProvidersDefinition">
-        <property name="baseUrl" value="http://localhost:8080/j_spring_oauth_security_check" />
-        <property name="providers">
+    <bean id="twitterEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="twitterClient" />
+    </bean>
+
+    <bean id="formEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="formClient" />
+    </bean>
+
+    <bean id="basicAuthEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="basicAuthClient" />
+    </bean>
+
+    <bean id="casEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="casClient" />
+    </bean>
+
+    <bean id="myOpenIdEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="myOpenIdClient" />
+    </bean>
+
+	<!-- clients definition -->
+    <bean id="facebookClient" class="org.pac4j.oauth.client.FacebookClient">
+        <property name="key" value="145278422258960" />
+        <property name="secret" value="be21409ba8f39b5dae2a7de525484da8" />
+    </bean>
+
+    <bean id="twitterClient" class="org.pac4j.oauth.client.TwitterClient">
+        <property name="key" value="CoxUiYwQOSFDReZYdjigBA" />
+        <property name="secret" value="2kAzunH5Btc4gRSaMr7D7MkyoJ5u1VzbOOzE8rBofs" />
+    </bean>
+
+	<bean id="usernamePasswordAuthenticator" class="org.pac4j.http.credentials.SimpleTestUsernamePasswordAuthenticator" />
+
+    <bean id="formClient" class="org.pac4j.http.client.FormClient">
+        <property name="loginUrl" value="http://localhost:8080/theForm.jsp" />
+        <property name="usernamePasswordAuthenticator" ref="usernamePasswordAuthenticator" />
+    </bean>
+
+    <bean id="basicAuthClient" class="org.pac4j.http.client.BasicAuthClient">
+        <property name="usernamePasswordAuthenticator" ref="usernamePasswordAuthenticator" />
+    </bean>
+
+    <bean id="casClient" class="org.pac4j.cas.client.CasClient">
+        <property name="casLoginUrl" value="http://localhost:8888/cas/login" />
+    </bean>
+
+    <bean id="myOpenIdClient" class="org.pac4j.openid.client.MyOpenIdClient" />
+
+    <bean id="clients" class="org.pac4j.core.client.Clients">
+        <property name="callbackUrl" value="http://localhost:8080/callback" />
+        <property name="clients">
         	<list>
-        		<ref bean="facebookProvider" />
-        		<ref bean="twitterProvider" />
+        		<ref bean="facebookClient" />
+        		<ref bean="twitterClient" />
+        		<ref bean="formClient" />
+        		<ref bean="basicAuthClient" />
+        		<ref bean="casClient" />
+        		<ref bean="myOpenIdClient" />
         	</list>
         </property>
     </bean>
-
-    <!-- ######################### OAUTH CONF ######################### -->
-    <bean id="facebookEntryPoint" class="com.github.leleuj.ss.oauth.client.web.OAuthAuthenticationEntryPoint">
-        <property name="provider" ref="facebookProvider" />
-    </bean>
-
-
-    <bean id="oAuthFilter" class="com.github.leleuj.ss.oauth.client.web.OAuthAuthenticationFilter">
-        <property name="providersDefinition" ref="providersDefinition" />
+	
+	<!-- common to all clients -->
+    <bean id="clientFilter" class="org.pac4j.springframework.security.web.ClientAuthenticationFilter">
+    	<constructor-arg value="/callback"/>
+        <property name="clients" ref="clients" />
         <property name="authenticationManager" ref="authenticationManager" />
     </bean>
 
-    <bean id="oAuthProvider" class="com.github.leleuj.ss.oauth.client.authentication.OAuthAuthenticationProvider">
-        <property name="providersDefinition" ref="providersDefinition" />
+    <bean id="clientProvider" class="org.pac4j.springframework.security.authentication.ClientAuthenticationProvider">
+        <property name="clients" ref="clients" />
     </bean>
 </beans>
