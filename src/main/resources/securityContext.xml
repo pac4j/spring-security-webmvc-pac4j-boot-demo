@@ -3,14 +3,14 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="clientProvider" />
     </security:authentication-manager>
 
 	<!-- urls and security configuration -->
-    <security:http pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
+    <security:http create-session="always" pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/facebook/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
@@ -113,10 +113,13 @@
     <bean id="clientFilter" class="org.pac4j.springframework.security.web.ClientAuthenticationFilter">
     	<constructor-arg value="/callback"/>
         <property name="clients" ref="clients" />
+        <property name="sessionAuthenticationStrategy" ref="sas" />
         <property name="authenticationManager" ref="authenticationManager" />
     </bean>
 
     <bean id="clientProvider" class="org.pac4j.springframework.security.authentication.ClientAuthenticationProvider">
         <property name="clients" ref="clients" />
     </bean>
+    
+    <bean id="sas" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
 </beans>
