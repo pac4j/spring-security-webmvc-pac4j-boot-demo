@@ -11,6 +11,7 @@
 
 	<!-- urls and security configuration -->
     <security:http create-session="always" pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
+    	<security:request-cache ref="httpSessionRequestCache"/>
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/facebook/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
@@ -120,6 +121,8 @@
     <bean id="clientProvider" class="org.pac4j.springframework.security.authentication.ClientAuthenticationProvider">
         <property name="clients" ref="clients" />
     </bean>
+    
+    <bean id="httpSessionRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
     
     <bean id="sas" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
 </beans>
