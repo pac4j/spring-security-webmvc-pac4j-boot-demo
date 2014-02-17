@@ -21,6 +21,11 @@
         <security:intercept-url pattern="/twitter/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
+    <security:http pattern="/google/**" entry-point-ref="googleEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/google/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
     <security:http pattern="/form/**" entry-point-ref="formEntryPoint">
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/form/**" access="IS_AUTHENTICATED_FULLY" />
@@ -48,6 +53,10 @@
         <property name="client" ref="facebookClient" />
     </bean>
 
+    <bean id="googleEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="googleClient" />
+    </bean>
+
     <bean id="twitterEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
         <property name="client" ref="twitterClient" />
     </bean>
@@ -69,6 +78,11 @@
     </bean>
 
 	<!-- clients definition -->
+    <bean id="googleClient" class="org.pac4j.oauth.client.Google2Client">
+        <property name="key" value="167480702619-0k2ikl9v3ph44u6i6hid1b160v4fggua.apps.googleusercontent.com" />
+        <property name="secret" value="i1jYBya-bxIyEqkLw7MaJ12A" />
+    </bean>
+
     <bean id="facebookClient" class="org.pac4j.oauth.client.FacebookClient">
         <property name="key" value="145278422258960" />
         <property name="secret" value="be21409ba8f39b5dae2a7de525484da8" />
@@ -102,6 +116,7 @@
         	<list>
         		<ref bean="facebookClient" />
         		<ref bean="twitterClient" />
+        		<ref bean="googleClient" />
         		<ref bean="formClient" />
         		<ref bean="basicAuthClient" />
         		<ref bean="casClient" />
