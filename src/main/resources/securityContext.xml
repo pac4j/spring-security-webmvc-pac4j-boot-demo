@@ -3,14 +3,15 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="clientProvider" />
     </security:authentication-manager>
 
 	<!-- urls and security configuration -->
-    <security:http pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
+    <security:http create-session="always" pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
+    	<security:request-cache ref="httpSessionRequestCache"/>
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/facebook/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
@@ -18,6 +19,11 @@
     <security:http pattern="/twitter/**" entry-point-ref="twitterEntryPoint">
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/twitter/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
+    <security:http pattern="/google/**" entry-point-ref="googleEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/google/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
     <security:http pattern="/form/**" entry-point-ref="formEntryPoint">
@@ -42,6 +48,10 @@
         <property name="client" ref="facebookClient" />
     </bean>
 
+    <bean id="googleEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="googleClient" />
+    </bean>
+
     <bean id="twitterEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
         <property name="client" ref="twitterClient" />
     </bean>
@@ -59,6 +69,11 @@
     </bean>
 
 	<!-- clients definition -->
+    <bean id="googleClient" class="org.pac4j.oauth.client.Google2Client">
+        <property name="key" value="167480702619-0k2ikl9v3ph44u6i6hid1b160v4fggua.apps.googleusercontent.com" />
+        <property name="secret" value="i1jYBya-bxIyEqkLw7MaJ12A" />
+    </bean>
+
     <bean id="facebookClient" class="org.pac4j.oauth.client.FacebookClient">
         <property name="key" value="145278422258960" />
         <property name="secret" value="be21409ba8f39b5dae2a7de525484da8" />
@@ -90,6 +105,7 @@
         	<list>
         		<ref bean="facebookClient" />
         		<ref bean="twitterClient" />
+        		<ref bean="googleClient" />
         		<ref bean="formClient" />
         		<ref bean="basicAuthClient" />
         		<ref bean="casClient" />
@@ -101,10 +117,15 @@
     <bean id="clientFilter" class="org.pac4j.springframework.security.web.ClientAuthenticationFilter">
     	<constructor-arg value="/callback"/>
         <property name="clients" ref="clients" />
+        <property name="sessionAuthenticationStrategy" ref="sas" />
         <property name="authenticationManager" ref="authenticationManager" />
     </bean>
 
     <bean id="clientProvider" class="org.pac4j.springframework.security.authentication.ClientAuthenticationProvider">
         <property name="clients" ref="clients" />
     </bean>
+    
+    <bean id="httpSessionRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
+    
+    <bean id="sas" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
 </beans>

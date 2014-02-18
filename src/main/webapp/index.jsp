@@ -18,6 +18,7 @@
 <h1>index</h1>
 <a href="facebook/index.jsp">Protected url by Facebook : facebook/index.jsp</a><br />
 <a href="twitter/index.jsp">Protected url by Twitter : twitter/index.jsp</a><br />
+<a href="google/index.jsp">Protected url by Google : google/index.jsp</a><br />
 <a href="form/index.jsp">Protected url by form authentication : form/index.jsp</a><br />
 <a href="basicauth/index.jsp">Protected url by basic auth : basicauth/index.jsp</a><br />
 <a href="cas/index.jsp">Protected url by CAS : cas/index.jsp</a><br />
