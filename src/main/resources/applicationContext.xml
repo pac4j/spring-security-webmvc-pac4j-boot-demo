@@ -13,7 +13,6 @@
                 <entry key="FormClient" value-ref="formClient" />
                 <entry key="BasicAuthClient" value-ref="basicAuthClient" />
                 <entry key="CasClient" value-ref="casClient" />
-                <entry key="MyOpenIdClient" value-ref="myOpenIdClient" />
             </map>
         </property>
     </bean>

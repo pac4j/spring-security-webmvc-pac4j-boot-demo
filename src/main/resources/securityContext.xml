@@ -30,14 +30,9 @@
         <security:intercept-url pattern="/basicauth/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
-    <security:http pattern="/cas/**" entry-point-ref="casEntryPoint">
+    <security:http pattern="/**" entry-point-ref="casEntryPoint">
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/cas/**" access="IS_AUTHENTICATED_FULLY" />
-    </security:http>
-
-    <security:http pattern="/**" entry-point-ref="myOpenIdEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
-        <security:intercept-url pattern="/myopenid/**" access="IS_AUTHENTICATED_FULLY" />
         <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:logout />
     </security:http>
@@ -61,10 +56,6 @@
 
     <bean id="casEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
         <property name="client" ref="casClient" />
-    </bean>
-
-    <bean id="myOpenIdEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="myOpenIdClient" />
     </bean>
 
 	<!-- clients definition -->
@@ -93,8 +84,6 @@
         <property name="casLoginUrl" value="http://localhost:8888/cas/login" />
     </bean>
 
-    <bean id="myOpenIdClient" class="org.pac4j.openid.client.MyOpenIdClient" />
-
     <bean id="clients" class="org.pac4j.core.client.Clients">
         <property name="callbackUrl" value="http://localhost:8080/callback" />
         <property name="clients">
@@ -104,7 +93,6 @@
         		<ref bean="formClient" />
         		<ref bean="basicAuthClient" />
         		<ref bean="casClient" />
-        		<ref bean="myOpenIdClient" />
         	</list>
         </property>
     </bean>
