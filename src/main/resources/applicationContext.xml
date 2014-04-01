@@ -13,6 +13,7 @@
                 <entry key="FormClient" value-ref="formClient" />
                 <entry key="BasicAuthClient" value-ref="basicAuthClient" />
                 <entry key="CasClient" value-ref="casClient" />
+                <entry key="Saml2Client" value-ref="samlClient" />
             </map>
         </property>
     </bean>

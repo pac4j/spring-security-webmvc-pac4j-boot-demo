@@ -36,6 +36,11 @@
         <security:intercept-url pattern="/basicauth/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
+    <security:http pattern="/saml/**" entry-point-ref="samlEntryPoint">
+        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
+        <security:intercept-url pattern="/saml/**" access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+
     <security:http pattern="/**" entry-point-ref="casEntryPoint">
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/cas/**" access="IS_AUTHENTICATED_FULLY" />
@@ -68,6 +73,10 @@
         <property name="client" ref="casClient" />
     </bean>
 
+    <bean id="samlEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
+        <property name="client" ref="samlClient" />
+    </bean>
+
 	<!-- clients definition -->
     <bean id="googleClient" class="org.pac4j.oauth.client.Google2Client">
         <property name="key" value="167480702619-0k2ikl9v3ph44u6i6hid1b160v4fggua.apps.googleusercontent.com" />
@@ -95,6 +104,13 @@
         <property name="usernamePasswordAuthenticator" ref="usernamePasswordAuthenticator" />
     </bean>
 
+    <bean id="samlClient" class="org.pac4j.saml.client.Saml2Client">
+        <property name="keystorePath" value="src/main/resources/samlKeystore.jks" />
+        <property name="keystorePassword" value="pac4j-demo-passwd" />
+        <property name="privateKeyPassword" value="pac4j-demo-passwd" />
+        <property name="idpMetadataPath" value="src/main/resources/testshib-providers.xml" />
+    </bean>
+
     <bean id="casClient" class="org.pac4j.cas.client.CasClient">
         <property name="casLoginUrl" value="http://localhost:8888/cas/login" />
     </bean>
@@ -109,6 +125,7 @@
         		<ref bean="formClient" />
         		<ref bean="basicAuthClient" />
         		<ref bean="casClient" />
+        		<ref bean="samlClient" />
         	</list>
         </property>
     </bean>
