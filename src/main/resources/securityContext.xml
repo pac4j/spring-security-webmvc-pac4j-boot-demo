@@ -12,32 +12,26 @@
 	<!-- urls and security configuration -->
     <security:http create-session="always" pattern="/facebook/**" entry-point-ref="facebookEntryPoint">
     	<security:request-cache ref="httpSessionRequestCache"/>
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/facebook/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
     <security:http pattern="/twitter/**" entry-point-ref="twitterEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/twitter/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
     <security:http pattern="/google/**" entry-point-ref="googleEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/google/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
     <security:http pattern="/form/**" entry-point-ref="formEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/form/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
     <security:http pattern="/basicauth/**" entry-point-ref="basicAuthEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/basicauth/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
     <security:http pattern="/saml/**" entry-point-ref="samlEntryPoint">
-        <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/saml/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
