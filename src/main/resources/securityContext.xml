@@ -99,10 +99,10 @@
     </bean>
 
     <bean id="samlClient" class="org.pac4j.saml.client.Saml2Client">
-        <property name="keystorePath" value="src/main/resources/samlKeystore.jks" />
+        <property name="keystorePath" value="resource:samlKeystore.jks" />
         <property name="keystorePassword" value="pac4j-demo-passwd" />
         <property name="privateKeyPassword" value="pac4j-demo-passwd" />
-        <property name="idpMetadataPath" value="src/main/resources/testshib-providers.xml" />
+        <property name="idpMetadataPath" value="resource:testshib-providers.xml" />
     </bean>
 
     <bean id="casClient" class="org.pac4j.cas.client.CasClient">
