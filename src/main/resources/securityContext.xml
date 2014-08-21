@@ -35,10 +35,11 @@
         <security:intercept-url pattern="/saml/**" access="IS_AUTHENTICATED_FULLY" />
     </security:http>
 
-    <security:http pattern="/**" entry-point-ref="casEntryPoint">
+    <security:http use-expressions="true" pattern="/**" entry-point-ref="casEntryPoint">
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
-        <security:intercept-url pattern="/cas/**" access="IS_AUTHENTICATED_FULLY" />
-        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/cas/restricted.jsp" access="hasRole('ADMIN')" />
+        <security:intercept-url pattern="/cas/**" access="isAuthenticated()" />
+        <security:intercept-url pattern="/**" access="permitAll()" />
         <security:logout />
     </security:http>
 
