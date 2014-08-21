@@ -107,6 +107,7 @@
 
     <bean id="casClient" class="org.pac4j.cas.client.CasClient">
         <property name="casLoginUrl" value="https://freeuse1.casinthecloud.com/leleujgithub/login" />
+        <property name="casPrefixUrl" value="https://freeuse1.casinthecloud.com/leleujgithub/p3" />
     </bean>
 
     <bean id="clients" class="org.pac4j.core.client.Clients">
