@@ -90,13 +90,17 @@
 
 	<bean id="usernamePasswordAuthenticator" class="org.pac4j.http.credentials.SimpleTestUsernamePasswordAuthenticator" />
 
+	<bean id="usernameProfileCreator" class="org.pac4j.http.profile.UsernameProfileCreator" />
+
     <bean id="formClient" class="org.pac4j.http.client.FormClient">
         <property name="loginUrl" value="http://localhost:8080/theForm.jsp" />
-        <property name="usernamePasswordAuthenticator" ref="usernamePasswordAuthenticator" />
+        <property name="authenticator" ref="usernamePasswordAuthenticator" />
+        <property name="profileCreator" ref="usernameProfileCreator" />
     </bean>
 
     <bean id="basicAuthClient" class="org.pac4j.http.client.BasicAuthClient">
-        <property name="usernamePasswordAuthenticator" ref="usernamePasswordAuthenticator" />
+        <property name="authenticator" ref="usernamePasswordAuthenticator" />
+        <property name="profileCreator" ref="usernameProfileCreator" />
     </bean>
 
     <bean id="samlClient" class="org.pac4j.saml.client.Saml2Client">
