@@ -29,14 +29,15 @@
     </repositories>
 
     <properties>
-        <pac4jVersion>1.6.0</pac4jVersion>
+        <pac4jVersion>1.7.0</pac4jVersion>
+        <springSecurityVersion>3.2.7.RELEASE</springSecurityVersion>
     </properties>
 
     <dependencies>
 		<dependency>
 			<groupId>org.pac4j</groupId>
 			<artifactId>spring-security-pac4j</artifactId>
-			<version>1.2.4</version>
+			<version>1.2.5-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.security</groupId>
@@ -51,12 +52,12 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.2.2.RELEASE</version>
+			<version>${springSecurityVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.2.RELEASE</version>
+			<version>${springSecurityVersion}</version>
 		</dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
@@ -81,6 +82,11 @@
         <dependency>
             <groupId>org.pac4j</groupId>
             <artifactId>pac4j-saml</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-oidc</artifactId>
             <version>${pac4jVersion}</version>
         </dependency>
 		<dependency>
