@@ -134,7 +134,6 @@
 	
 	<!-- common to all clients -->
     <bean id="clientFilter" class="org.pac4j.springframework.security.web.ClientAuthenticationFilter">
-    	<constructor-arg value="/callback"/>
         <property name="clients" ref="clients" />
         <property name="sessionAuthenticationStrategy" ref="sas" />
         <property name="authenticationManager" ref="authenticationManager" />
