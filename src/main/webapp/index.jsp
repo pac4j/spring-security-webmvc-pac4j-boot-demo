@@ -26,7 +26,7 @@
 <a href="cas/index.jsp">Protected url by CAS : cas/index.jsp</a><br />
 <a href="saml/index.jsp">Protected url by SAML : saml/index.jsp</a><br />
 <br />
-<a href="/j_spring_security_logout">logout</a>
+<a href="/logout">logout</a>
 <br /><br />
 <%Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 UserProfile profile = null;
