@@ -38,6 +38,7 @@
     </security:http>
 
     <security:http pattern="/**" entry-point-ref="casEntryPoint">
+        <security:csrf disabled="true"/>
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/cas/restricted.jsp" access="hasRole('ADMIN')" />
         <security:intercept-url pattern="/cas/**" access="isAuthenticated()" />
