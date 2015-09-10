@@ -35,11 +35,12 @@
 
     <security:http pattern="/saml/**" entry-point-ref="samlEntryPoint">
         <security:headers disabled="true" />
-        <security:intercept-url pattern="/saml/**" access="isAuthenticated()" />
+	<security:intercept-url pattern="/saml/**" access="isAuthenticated()" />
     </security:http>
 
     <security:http pattern="/**" entry-point-ref="casEntryPoint">
         <security:csrf disabled="true"/>
+	<security:headers disabled="true" />
         <security:custom-filter after="CAS_FILTER" ref="clientFilter" />
         <security:intercept-url pattern="/cas/restricted.jsp" access="hasRole('ADMIN')" />
         <security:intercept-url pattern="/cas/**" access="isAuthenticated()" />
