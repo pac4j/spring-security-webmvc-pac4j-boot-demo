@@ -50,31 +50,38 @@
 
 	<!-- entry points -->
     <bean id="facebookEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="facebookClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="FacebookClient" />
     </bean>
 
     <bean id="googleEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="googleClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="GoogleClient" />
     </bean>
 
     <bean id="twitterEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="twitterClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="TwitterClient" />
     </bean>
 
     <bean id="formEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="formClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="FormClient" />
     </bean>
 
     <bean id="basicAuthEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="basicAuthClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="IndirectBasicAuthClient" />
     </bean>
 
     <bean id="casEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="casClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="CasClient" />
     </bean>
 
     <bean id="samlEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="client" ref="samlClient" />
+        <property name="clients" ref="clients" />
+        <property name="clientName" value="SAML2Client" />
     </bean>
 
 	<!-- clients definition -->
@@ -93,31 +100,30 @@
         <property name="secret" value="2kAzunH5Btc4gRSaMr7D7MkyoJ5u1VzbOOzE8rBofs" />
     </bean>
 
-	<bean id="usernamePasswordAuthenticator" class="org.pac4j.http.credentials.SimpleTestUsernamePasswordAuthenticator" />
+	<bean id="usernamePasswordAuthenticator" class="org.pac4j.http.credentials.authenticator.test.SimpleTestUsernamePasswordAuthenticator" />
 
-    <bean id="usernameProfileCreator" class="org.pac4j.http.profile.UsernameProfileCreator" />
-
-    <bean id="formClient" class="org.pac4j.http.client.FormClient">
-        <property name="loginUrl" value="http://localhost:8080/theForm.jsp" />
+    <bean id="formClient" class="org.pac4j.http.client.indirect.FormClient">
+        <property name="loginUrl" value="http://localhost:8080/loginForm.jsp" />
         <property name="authenticator" ref="usernamePasswordAuthenticator" />
-        <property name="profileCreator" ref="usernameProfileCreator" />
     </bean>
 
-    <bean id="basicAuthClient" class="org.pac4j.http.client.BasicAuthClient">
+    <bean id="basicAuthClient" class="org.pac4j.http.client.indirect.IndirectBasicAuthClient">
         <property name="authenticator" ref="usernamePasswordAuthenticator" />
-        <property name="profileCreator" ref="usernameProfileCreator" />
     </bean>
 
-    <bean id="samlClient" class="org.pac4j.saml.client.Saml2Client">
+    <bean id="samlConfig" class="org.pac4j.saml.client.SAML2ClientConfiguration">
         <property name="keystorePath" value="resource:samlKeystore.jks" />
         <property name="keystorePassword" value="pac4j-demo-passwd" />
         <property name="privateKeyPassword" value="pac4j-demo-passwd" />
-        <property name="idpMetadataPath" value="resource:testshib-providers.xml" />
+        <property name="identityProviderMetadataPath" value="resource:testshib-providers.xml" />
+    </bean>
+
+    <bean id="samlClient" class="org.pac4j.saml.client.SAML2Client">
+        <constructor-arg name="configuration" ref="samlConfig" />
     </bean>
 
     <bean id="casClient" class="org.pac4j.cas.client.CasClient">
-        <property name="casLoginUrl" value="http://localhost:8888/cas/login" />
-        <property name="casPrefixUrl" value="http://localhost:8888/cas/p3" />
+        <property name="casLoginUrl" value="https://casserverpac4j.herokuapp.com/login" />
     </bean>
 
     <bean id="clients" class="org.pac4j.core.client.Clients">
@@ -134,7 +140,7 @@
         	</list>
         </property>
     </bean>
-	
+
 	<!-- common to all clients -->
     <bean id="clientFilter" class="org.pac4j.springframework.security.web.ClientAuthenticationFilter">
         <property name="clients" ref="clients" />
@@ -145,8 +151,8 @@
     <bean id="clientProvider" class="org.pac4j.springframework.security.authentication.ClientAuthenticationProvider">
         <property name="clients" ref="clients" />
     </bean>
-    
+
     <bean id="httpSessionRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
-    
+
     <bean id="sas" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
 </beans>
