@@ -50,38 +50,31 @@
 
 	<!-- entry points -->
     <bean id="facebookEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="FacebookClient" />
+        <property name="client" ref="facebookClient" />
     </bean>
 
     <bean id="googleEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="GoogleClient" />
+        <property name="client" ref="googleClient" />
     </bean>
 
     <bean id="twitterEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="TwitterClient" />
+        <property name="client" ref="twitterClient" />
     </bean>
 
     <bean id="formEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="FormClient" />
+        <property name="client" ref="formClient" />
     </bean>
 
     <bean id="basicAuthEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="IndirectBasicAuthClient" />
+        <property name="client" ref="basicAuthClient" />
     </bean>
 
     <bean id="casEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="CasClient" />
+        <property name="client" ref="casClient" />
     </bean>
 
     <bean id="samlEntryPoint" class="org.pac4j.springframework.security.web.ClientAuthenticationEntryPoint">
-        <property name="clients" ref="clients" />
-        <property name="clientName" value="SAML2Client" />
+        <property name="client" ref="samlClient" />
     </bean>
 
 	<!-- clients definition -->

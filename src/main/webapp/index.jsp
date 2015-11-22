@@ -12,12 +12,12 @@
 <%
 	WebContext context = new J2EContext(request, response);
 	Clients clients = (Clients) application.getAttribute("clients");
-	FacebookClient fbClient = (FacebookClient) clients.findClient(context, "FacebookClient");
-	TwitterClient twClient = (TwitterClient) clients.findClient(context, "TwitterClient");
-	FormClient formClient = (FormClient) clients.findClient(context, "FormClient");
-	IndirectBasicAuthClient baClient = (IndirectBasicAuthClient) clients.findClient(context, "IndirectBasicAuthClient");
-	CasClient casClient = (CasClient) clients.findClient(context, "CasClient");
-	SAML2Client saml2Client = (SAML2Client) clients.findClient(context, "SAML2Client");
+	FacebookClient fbClient = (FacebookClient) clients.findClient("FacebookClient");
+	TwitterClient twClient = (TwitterClient) clients.findClient("TwitterClient");
+	FormClient formClient = (FormClient) clients.findClient("FormClient");
+	IndirectBasicAuthClient baClient = (IndirectBasicAuthClient) clients.findClient("IndirectBasicAuthClient");
+	CasClient casClient = (CasClient) clients.findClient("CasClient");
+	SAML2Client saml2Client = (SAML2Client) clients.findClient("SAML2Client");
 %>
 <h1>index</h1>
 <a href="facebook/index.jsp">Protected url by Facebook : facebook/index.jsp</a> (use a real account)<br />
