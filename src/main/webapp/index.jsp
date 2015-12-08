@@ -26,7 +26,7 @@
 <a href="form/index.jsp">Protected url by form authentication : form/index.jsp</a> (use login = pwd)<br />
 <a href="basicauth/index.jsp">Protected url by basic auth : basicauth/index.jsp</a> (use login = pwd)<br />
 <a href="cas/index.jsp">Protected url by CAS : cas/index.jsp</a> (use login = pwd)<br />
-<a href="saml/index.jsp">Protected url by SAML : saml/index.jsp</a><br />
+<a href="saml/index.jsp">Protected url by SAML : saml/index.jsp</a> (use testpac4j at gmail.com / Pac4jtest)<br />
 <br />
 <a href="/logout">logout</a>
 <br /><br />
