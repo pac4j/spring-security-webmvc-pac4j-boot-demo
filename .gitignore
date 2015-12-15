@@ -7,3 +7,4 @@ bin/
 .idea
 *.iml
 sp-metadata.xml
+.DS_Store
