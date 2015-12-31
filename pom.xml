@@ -33,7 +33,7 @@
         <springSecurityVersion>4.0.3.RELEASE</springSecurityVersion>
         <springVersion>4.2.2.RELEASE</springVersion>
         <servletVersion>3.0.1</servletVersion>
-        <springSecurityPac4jVersion>1.4.0</springSecurityPac4jVersion>
+        <springSecurityPac4jVersion>1.4.1-SNAPSHOT</springSecurityPac4jVersion>
         <logbackVersion>1.0.13</logbackVersion>
         <jspApiVersion>2.1</jspApiVersion>
     </properties>
