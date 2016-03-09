@@ -108,7 +108,7 @@
         <property name="keystorePath" value="resource:samlKeystore.jks" />
         <property name="keystorePassword" value="pac4j-demo-passwd" />
         <property name="privateKeyPassword" value="pac4j-demo-passwd" />
-        <property name="identityProviderMetadataPath" value="resource:ssocircle-metadata.xml" />
+        <property name="identityProviderMetadataPath" value="resource:metadata-okta.xml" />
         <property name="maximumAuthenticationLifetime" value="3600" />
         <property name="serviceProviderEntityId" value="http://localhost:8080/callback?client_name=SAML2Client" />
         <property name="serviceProviderMetadataPath" value="sp-metadata.xml" />
