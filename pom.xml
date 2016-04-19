@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pac4j.demos</groupId>
     <artifactId>spring-security-pac4j-demo</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Spring Security webapp to test the spring-security-pac4j security extension</name>
 
