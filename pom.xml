@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pac4j.demos</groupId>
     <artifactId>spring-security-pac4j-demo</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Spring Security webapp to test the spring-security-pac4j security extension</name>
 
@@ -18,23 +18,15 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>scribe-java-mvn-repo</id>
-            <url>https://raw.github.com/fernandezpablo85/scribe-java/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-        </snapshots>
-        </repository>
     </repositories>
 
     <properties>
-        <pac4jVersion>1.8.8</pac4jVersion>
+        <java.version>1.8</java.version>
+        <springSecurityPac4jVersion>2.0.0-SNAPSHOT</springSecurityPac4jVersion>
+        <pac4jVersion>1.9.1-SNAPSHOT</pac4jVersion>
         <springSecurityVersion>4.0.3.RELEASE</springSecurityVersion>
         <springVersion>4.2.2.RELEASE</springVersion>
         <servletVersion>3.0.1</servletVersion>
-        <springSecurityPac4jVersion>1.4.3</springSecurityPac4jVersion>
-        <logbackVersion>1.0.13</logbackVersion>
         <jspApiVersion>2.1</jspApiVersion>
     </properties>
 
@@ -102,7 +94,7 @@
         <dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logbackVersion}</version>
+			<version>1.0.13</version>
 		</dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -125,8 +117,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
