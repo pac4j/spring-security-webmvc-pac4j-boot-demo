@@ -8,9 +8,7 @@
           http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
     <security:authentication-manager />
-    <bean id="pac4jEntryPoint" class="org.pac4j.springframework.security.Pac4jEntryPoint">
-        <property name="client" ref="facebookClient" />
-    </bean>
+    <bean id="pac4jEntryPoint" class="org.pac4j.springframework.security.Pac4jEntryPoint" />
 
 
     <bean id="facebookSecurityFilter" class="org.pac4j.springframework.security.SecurityFilter">

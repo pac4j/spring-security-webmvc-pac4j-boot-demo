@@ -1,3 +1,4 @@
+<%@page session="false" %>
 <%@page import="org.pac4j.springframework.security.Pac4jAuthentication"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <h1>protected area</h1>
