@@ -31,11 +31,11 @@
     </properties>
 
     <dependencies>
-		<dependency>
-			<groupId>org.pac4j</groupId>
-			<artifactId>spring-security-pac4j</artifactId>
-			<version>${springSecurityPac4jVersion}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>spring-security-pac4j</artifactId>
+            <version>${springSecurityPac4jVersion}</version>
+        </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
             <artifactId>pac4j-oauth</artifactId>
@@ -92,10 +92,10 @@
             <version>${pac4jVersion}</version>
         </dependency>
         <dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
-		</dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
