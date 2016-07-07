@@ -1,4 +1,4 @@
-<%@page import="org.pac4j.springframework.security.Pac4jAuthentication"%>
+<%@page import="org.pac4j.springframework.security.authentication.Pac4jAuthentication"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <h1>protected area</h1>
 <a href="..">Back</a><br />

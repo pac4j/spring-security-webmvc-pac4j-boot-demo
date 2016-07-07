@@ -1,4 +1,4 @@
-<%@page import="org.pac4j.springframework.security.*"%>
+<%@page import="org.pac4j.springframework.security.authentication.*"%>
 <%@page import="org.springframework.security.core.*"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="org.pac4j.core.profile.*"%>
