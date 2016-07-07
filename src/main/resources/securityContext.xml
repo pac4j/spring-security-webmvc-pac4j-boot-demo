@@ -20,6 +20,13 @@
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookSecurityFilter" />
     </security:http>
 
+    <bean id="fbPac4jEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
+        <property name="client" ref="facebookClient" />
+    </bean>
+    <security:http create-session="always" pattern="/facebookadmin/**" entry-point-ref="fbPac4jEntryPoint">
+        <security:intercept-url pattern="/facebookadmin/**" access="hasRole('ADMIN')" />
+    </security:http>
+    <!--
     <bean id="facebookAdminSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="FacebookClient" />
@@ -28,6 +35,7 @@
     <security:http create-session="always" pattern="/facebookadmin/**" entry-point-ref="pac4jEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookAdminSecurityFilter" />
     </security:http>
+    -->
 
     <bean id="facebookCustomSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
@@ -182,6 +190,7 @@
     <bean id="facebookClient" class="org.pac4j.oauth.client.FacebookClient">
         <property name="key" value="145278422258960" />
         <property name="secret" value="be21409ba8f39b5dae2a7de525484da8" />
+        <property name="callbackUrl" value="http://localhost:8080/callback?client_name=FacebookClient" />
     </bean>
 
     <bean id="twitterClient" class="org.pac4j.oauth.client.TwitterClient">
