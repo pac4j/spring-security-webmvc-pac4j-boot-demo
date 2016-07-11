@@ -11,27 +11,16 @@
     <bean id="pac4jEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint" />
 
 
-    <bean id="fbPac4jEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
-        <property name="config" ref="config" />
-        <property name="client" value="FacebookClient" />
-    </bean>
-    <security:http create-session="always" pattern="/facebook/**" entry-point-ref="fbPac4jEntryPoint">
-        <security:intercept-url pattern="/facebook/**" access="isAuthenticated()" />
-    </security:http>
-    <!--bean id="facebookSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
+    <bean id="facebookSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="FacebookClient" />
         <property name="matchers" value="excludedPath" />
     </bean>
     <security:http create-session="always" pattern="/facebook/**" entry-point-ref="pac4jEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookSecurityFilter" />
-    </security:http-->
-
-
-    <security:http create-session="always" pattern="/facebookadmin/**" entry-point-ref="fbPac4jEntryPoint">
-        <security:intercept-url pattern="/facebookadmin/**" access="hasRole('ADMIN')" />
     </security:http>
-    <!--
+
+
     <bean id="facebookAdminSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="FacebookClient" />
@@ -40,7 +29,6 @@
     <security:http create-session="always" pattern="/facebookadmin/**" entry-point-ref="pac4jEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookAdminSecurityFilter" />
     </security:http>
-    -->
 
 
     <bean id="facebookCustomSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
