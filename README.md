@@ -2,7 +2,7 @@
   <img src="https://pac4j.github.io/pac4j/img/logo-spring-security.png" width="300" />
 </p>
 
-This `spring-security-pac4j-demo` project is a Spring Security web application to test the [spring-security-pac4j](https://github.com/pac4j/spring-security-pac4j) security extension with various authentication mechanisms: Facebook, Twitter, form, basic auth, CAS, SAML...
+This `spring-security-pac4j-demo` project is a Spring Security web application to test the [spring-security-pac4j](https://github.com/pac4j/spring-security-pac4j) security library with various authentication mechanisms: Facebook, Twitter, form, basic auth, CAS, SAML...
 
 
 ## Start & test
