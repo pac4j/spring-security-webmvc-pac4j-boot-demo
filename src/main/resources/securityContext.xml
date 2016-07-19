@@ -157,9 +157,11 @@
 
 
 	<!-- security configuration -->
+    <bean id="roleAdminAuthGenerator" class="org.pac4j.demo.spring.RoleAdminAuthGenerator" />
     <bean id="googleOidcClient" class="org.pac4j.oidc.client.GoogleOidcClient">
         <property name="clientID" value="167480702619-8e1lo80dnu8bpk3k0lvvj27noin97vu9.apps.googleusercontent.com" />
         <property name="secret" value="MhMme_Ik6IH2JMnAT6MFIfee" />
+        <property name="authorizationGenerator" ref="roleAdminAuthGenerator" />
     </bean>
 
     <bean id="samlConfig" class="org.pac4j.saml.client.SAML2ClientConfiguration">
