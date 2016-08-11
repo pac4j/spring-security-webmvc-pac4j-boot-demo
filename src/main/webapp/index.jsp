@@ -7,6 +7,7 @@
 <a href="facebook/index.jsp">Protected url by Facebook: facebook/index.jsp</a> (use a real account)<br />
 <a href="facebook/notprotected.jsp">Not protected page: facebook/notprotected.jsp</a> (no authentication required)<br />
 <a href="facebookadmin/index.jsp">Protected url by Facebook with ROLE_ADMIN: facebookadmin/index.jsp</a> (use a real account)<br />
+<a href="roleadmin/index.html">Protected url by @PreAuthorize("hasRole('ROLE_ADMIN')"): roleadmin/index.html</a><br />
 <a href="facebookcustom/index.jsp">Protected url by Facebook with custom authorizer (= must be a <em>CommonProfile</em> where the username starts with "jle"): facebookcustom/index.jsp</a> (login with form or basic authentication before with jle* username)<br />
 <a href="twitter/index.jsp">Protected url by Twitter: twitter/index.jsp</a> or <a href="twitter/index.jsp?client_name=FacebookClient">by Facebook: twitter/index.jsp?client_name=FacebookClient</a> (use a real account)<br />
 <a href="form/index.jsp">Protected url by form authentication: form/index.jsp</a> (use login = pwd)<br />

@@ -26,6 +26,7 @@
         <pac4jVersion>1.9.1</pac4jVersion>
         <springSecurityVersion>4.1.0.RELEASE</springSecurityVersion>
         <springVersion>4.3.1.RELEASE</springVersion>
+        <spring.version>4.2.6.RELEASE</spring.version>
     </properties>
 
     <dependencies>
@@ -33,6 +34,11 @@
             <groupId>org.pac4j</groupId>
             <artifactId>spring-security-pac4j</artifactId>
             <version>${springSecurityPac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
