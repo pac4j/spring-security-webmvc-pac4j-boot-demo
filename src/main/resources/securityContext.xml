@@ -8,7 +8,10 @@
           http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
     <security:authentication-manager />
-    <bean id="pac4jEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint" />
+    <bean id="pac4jEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
+        <!--property name="config" ref="config" />
+        <property name="clientName" value="FacebookClient" /-->
+    </bean>
 
 
     <bean id="facebookSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
@@ -145,6 +148,15 @@
     </bean>
     <security:http create-session="always" pattern="/forceLogin*" entry-point-ref="pac4jEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="forceLoginFilter" />
+    </security:http>
+
+
+    <bean id="roleAdminSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
+        <property name="config" ref="config" />
+        <property name="clients" value="FacebookClient" />
+    </bean>
+    <security:http create-session="always" pattern="/roleadmin/**" entry-point-ref="pac4jEntryPoint">
+        <security:custom-filter position="BASIC_AUTH_FILTER" ref="roleAdminSecurityFilter" />
     </security:http>
 
 
