@@ -154,8 +154,12 @@
     <bean id="roleAdminSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="FacebookClient" />
+        <property name="authorizers" value="noframe,nocache,csrfToken" />
     </bean>
     <security:http create-session="always" pattern="/roleadmin/**" entry-point-ref="pac4jEntryPoint">
+        <security:csrf disabled="true"/>
+        <security:headers disabled="true" />
+
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="roleAdminSecurityFilter" />
     </security:http>
 
