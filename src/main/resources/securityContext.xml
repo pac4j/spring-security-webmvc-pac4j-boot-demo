@@ -244,8 +244,11 @@
         <property name="authenticator" ref="usernamePasswordAuthenticator" />
     </bean>
 
+    <bean id="casConfigurationClient" class="org.pac4j.cas.config.CasConfiguration">
+        <constructor-arg value="https://casserverpac4j.herokuapp.com/login"/>
+    </bean>
     <bean id="casClient" class="org.pac4j.cas.client.CasClient">
-        <property name="casLoginUrl" value="https://casserverpac4j.herokuapp.com/login" />
+        <constructor-arg ref="casConfigurationClient"/>
     </bean>
 
     <bean id="parameterClient" class="org.pac4j.http.client.direct.ParameterClient">
