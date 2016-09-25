@@ -187,12 +187,19 @@
     </bean>
 
     <!-- OidcClient -->
-    <bean id="mitreIdClient" class="org.pac4j.oidc.client.OidcClient">
-        <property name="clientID" value="21c0da5f-40f6-4ff0-bfdb-6803d3b8cee3" />
+    <bean id="mitreidConfigurationClient" class="org.pac4j.oidc.config.OidcConfiguration">
+        <property name="clientAuthenticationMethod" value="NONE"/>
+        <property name="clientId" value="21c0da5f-40f6-4ff0-bfdb-6803d3b8cee3" />
         <property name="secret" value="AKJsHgTaQt71BgXb0apln934_vs0aSeczucxG0H5-RvDOt199fDEDTCxWF3XWDDOsTAtlectw429LEizC0wcKTI" />
+        <property name="scope" value="address phone openid email profile" />
         <property name="discoveryURI" value="https://mitreid.org/.well-known/openid-configuration" />
         <property name="preferredJwsAlgorithm" value="RS256"/>
     </bean>
+
+    <bean id="mitreIdClient" class="org.pac4j.oidc.client.OidcClient">
+        <constructor-arg ref="mitreidConfigurationClient"/>
+    </bean>
+
 
     <bean id="samlConfig" class="org.pac4j.saml.client.SAML2ClientConfiguration">
         <property name="keystorePath" value="resource:samlKeystore.jks" />
