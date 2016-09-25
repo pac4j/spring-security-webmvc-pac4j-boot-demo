@@ -88,7 +88,6 @@
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="samlSecurityFilter" />
     </security:http>
 
-
     <bean id="oidcSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="GoogleOidcClient" />
@@ -97,6 +96,13 @@
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="oidcSecurityFilter" />
     </security:http>
 
+    <bean id="mitreIdSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
+        <property name="config" ref="config" />
+        <property name="clients" value="OidcClient" />
+    </bean>
+    <security:http create-session="always" pattern="/mitreid/**" entry-point-ref="pac4jEntryPoint">
+        <security:custom-filter position="BASIC_AUTH_FILTER" ref="mitreIdSecurityFilter" />
+    </security:http>
 
     <bean id="googleSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
@@ -180,6 +186,14 @@
         <property name="authorizationGenerator" ref="roleAdminAuthGenerator" />
     </bean>
 
+    <!-- OidcClient -->
+    <bean id="mitreIdClient" class="org.pac4j.oidc.client.OidcClient">
+        <property name="clientID" value="21c0da5f-40f6-4ff0-bfdb-6803d3b8cee3" />
+        <property name="secret" value="AKJsHgTaQt71BgXb0apln934_vs0aSeczucxG0H5-RvDOt199fDEDTCxWF3XWDDOsTAtlectw429LEizC0wcKTI" />
+        <property name="discoveryURI" value="https://mitreid.org/.well-known/openid-configuration" />
+        <property name="preferredJwsAlgorithm" value="RS256"/>
+    </bean>
+
     <bean id="samlConfig" class="org.pac4j.saml.client.SAML2ClientConfiguration">
         <property name="keystorePath" value="resource:samlKeystore.jks" />
         <property name="keystorePassword" value="pac4j-demo-passwd" />
@@ -248,6 +262,7 @@
         		<ref bean="facebookClient" />
         		<ref bean="twitterClient" />
         		<ref bean="googleClient" />
+        		<ref bean="mitreIdClient" />
         		<ref bean="formClient" />
         		<ref bean="indirectBasicAuthClient" />
         		<ref bean="casClient" />
