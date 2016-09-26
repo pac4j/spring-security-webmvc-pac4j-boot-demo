@@ -15,6 +15,7 @@
 <a href="cas/index.jsp">Protected url by CAS: cas/index.jsp</a> (use login = pwd)<br />
 <a href="saml2/index.jsp">Protected url by SAML2: saml2/index.jsp</a> (use testpac4j at gmail.com / Pac4jtest)<br />
 <a href="oidc/index.jsp">Protected url by Google OpenID Connect: oidc/index.jsp</a> (use a real account)<br />
+<a href="mitreid/index.jsp">Protected url by MitreID OpenID Connect: mitreid/index.jsp</a> (use account login = user, pwd = password)<br />
 <a href="google/index.jsp">Protected url by Google OAuth: google/index.jsp</a> (use a real account)<br />
 <a href="protected/index.jsp">Protected url: protected/index.jsp</a> (won't start any login process)<br />
 <br />
