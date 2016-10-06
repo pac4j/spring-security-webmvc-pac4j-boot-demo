@@ -8,7 +8,7 @@
           http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
     <security:authentication-manager />
-    <bean id="pac4jEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
+    <bean id="noEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
         <!--property name="config" ref="config" />
         <property name="clientName" value="FacebookClient" /-->
     </bean>
@@ -19,7 +19,7 @@
         <property name="clients" value="FacebookClient" />
         <property name="matchers" value="excludedPath" />
     </bean>
-    <security:http create-session="always" pattern="/facebook/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/facebook/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookSecurityFilter" />
     </security:http>
 
@@ -29,7 +29,7 @@
         <property name="clients" value="FacebookClient" />
         <property name="authorizers" value="admin" />
     </bean>
-    <security:http create-session="always" pattern="/facebookadmin/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/facebookadmin/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookAdminSecurityFilter" />
     </security:http>
 
@@ -39,7 +39,7 @@
         <property name="clients" value="FacebookClient" />
         <property name="authorizers" value="custom" />
     </bean>
-    <security:http create-session="always" pattern="/facebookcustom/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/facebookcustom/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="facebookCustomSecurityFilter" />
     </security:http>
 
@@ -48,7 +48,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="TwitterClient,FacebookClient" />
     </bean>
-    <security:http create-session="always" pattern="/twitter/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/twitter/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="twitterSecurityFilter" />
     </security:http>
 
@@ -57,7 +57,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="FormClient" />
     </bean>
-    <security:http create-session="always" pattern="/form/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/form/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="formSecurityFilter" />
     </security:http>
 
@@ -66,7 +66,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="IndirectBasicAuthClient" />
     </bean>
-    <security:http create-session="always" pattern="/basicauth/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/basicauth/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="baSecurityFilter" />
     </security:http>
 
@@ -75,7 +75,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="CasClient" />
     </bean>
-    <security:http create-session="always" pattern="/cas/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/cas/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="casSecurityFilter" />
     </security:http>
 
@@ -84,7 +84,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="Saml2Client" />
     </bean>
-    <security:http create-session="always" pattern="/saml2/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/saml2/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="samlSecurityFilter" />
     </security:http>
 
@@ -92,7 +92,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="GoogleOidcClient" />
     </bean>
-    <security:http create-session="always" pattern="/oidc/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/oidc/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="oidcSecurityFilter" />
     </security:http>
 
@@ -100,7 +100,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="OidcClient" />
     </bean>
-    <security:http create-session="always" pattern="/mitreid/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/mitreid/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="mitreIdSecurityFilter" />
     </security:http>
 
@@ -108,7 +108,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="Google2Client" />
     </bean>
-    <security:http create-session="always" pattern="/google/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/google/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="googleSecurityFilter" />
     </security:http>
 
@@ -116,7 +116,7 @@
     <bean id="protectedSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
     </bean>
-    <security:http create-session="always" pattern="/protected/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/protected/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="protectedSecurityFilter" />
     </security:http>
 
@@ -125,7 +125,7 @@
         <property name="config" ref="config" />
         <property name="clients" value="ParameterClient" />
     </bean>
-    <security:http create-session="never" pattern="/rest-jwt/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="never" pattern="/rest-jwt/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="jwtSecurityFilter" />
     </security:http>
 
@@ -134,25 +134,15 @@
         <property name="config" ref="config" />
         <property name="clients" value="DirectBasicAuthClient,ParameterClient" />
     </bean>
-    <security:http create-session="never" pattern="/dba/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="never" pattern="/dba/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="dbaSecurityFilter" />
-    </security:http>
-
-
-    <bean id="callbackFilter" class="org.pac4j.springframework.security.web.CallbackFilter">
-        <property name="config" ref="config" />
-        <property name="multiProfile" value="true" />
-    </bean>
-    <security:http create-session="always" pattern="/callback*" entry-point-ref="pac4jEntryPoint">
-        <security:csrf disabled="true"/>
-        <security:custom-filter position="BASIC_AUTH_FILTER" ref="callbackFilter" />
     </security:http>
 
 
     <bean id="forceLoginFilter" class="org.pac4j.demo.spring.ForceLoginFilter">
         <property name="config" ref="config" />
     </bean>
-    <security:http create-session="always" pattern="/forceLogin*" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/forceLogin*" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="forceLoginFilter" />
     </security:http>
 
@@ -162,7 +152,7 @@
         <property name="clients" value="FacebookClient" />
         <property name="authorizers" value="noframe,nocache,csrfToken" />
     </bean>
-    <security:http create-session="always" pattern="/roleadmin/**" entry-point-ref="pac4jEntryPoint">
+    <security:http create-session="always" pattern="/roleadmin/**" entry-point-ref="noEntryPoint">
         <security:csrf disabled="true"/>
         <security:headers disabled="true" />
 
@@ -170,10 +160,14 @@
     </security:http>
 
 
-    <security:http pattern="/**" entry-point-ref="pac4jEntryPoint">
-        <security:csrf disabled="true"/>
-	    <security:headers disabled="true" />
+    <bean id="callbackFilter" class="org.pac4j.springframework.security.web.CallbackFilter">
+        <property name="config" ref="config" />
+        <property name="multiProfile" value="true" />
+    </bean>
 
+    <security:http pattern="/**" entry-point-ref="noEntryPoint">
+        <security:csrf disabled="true"/>
+        <security:custom-filter position="BASIC_AUTH_FILTER" ref="callbackFilter" />
         <security:logout logout-success-url="/" />
     </security:http>
 
