@@ -8,10 +8,7 @@
           http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
     <security:authentication-manager />
-    <bean id="noEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
-        <!--property name="config" ref="config" />
-        <property name="clientName" value="FacebookClient" /-->
-    </bean>
+    <bean id="noEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint" />
 
 
     <bean id="facebookSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
@@ -55,10 +52,15 @@
 
     <bean id="formSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
-        <property name="clients" value="FormClient" />
+        <property name="clients" value="DirectBasicAuthClient,AnonymousClient" />
     </bean>
-    <security:http create-session="always" pattern="/form/**" entry-point-ref="noEntryPoint">
+    <bean id="formEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
+        <property name="config" ref="config" />
+        <property name="clientName" value="FormClient" />
+    </bean>
+    <security:http create-session="always" pattern="/form/**" entry-point-ref="formEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="formSecurityFilter" />
+        <security:intercept-url pattern="/form/**" access="isAuthenticated()" />
     </security:http>
 
 
@@ -71,21 +73,14 @@
     </security:http>
 
 
-    <bean id="casSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
-        <property name="config" ref="config" />
-        <property name="clients" value="CasClient" />
-    </bean>
-    <security:http create-session="always" pattern="/cas/**" entry-point-ref="noEntryPoint">
-        <security:custom-filter position="BASIC_AUTH_FILTER" ref="casSecurityFilter" />
-    </security:http>
-
-
     <bean id="samlSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="Saml2Client" />
     </bean>
     <security:http create-session="always" pattern="/saml2/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="samlSecurityFilter" />
+        <security:intercept-url pattern="/saml2/admin.jsp" access="hasRole('ADMIN')" />
+        <security:intercept-url pattern="/saml2/**" access="isAuthenticated()" />
     </security:http>
 
     <bean id="oidcSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
@@ -160,14 +155,20 @@
     </security:http>
 
 
+    <bean id="casEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint">
+        <property name="config" ref="config" />
+        <property name="clientName" value="CasClient" />
+    </bean>
+
     <bean id="callbackFilter" class="org.pac4j.springframework.security.web.CallbackFilter">
         <property name="config" ref="config" />
         <property name="multiProfile" value="true" />
     </bean>
 
-    <security:http pattern="/**" entry-point-ref="noEntryPoint">
+    <security:http pattern="/**" entry-point-ref="casEntryPoint">
         <security:csrf disabled="true"/>
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="callbackFilter" />
+        <security:intercept-url pattern="/cas/**" access="isAuthenticated()" />
         <security:logout logout-success-url="/" />
     </security:http>
 
@@ -261,6 +262,8 @@
         <constructor-arg name="usernamePasswordAuthenticator" ref="usernamePasswordAuthenticator" />
     </bean>
 
+    <bean id="anonymousClient" class="org.pac4j.core.client.direct.AnonymousClient" />
+
     <bean id="clients" class="org.pac4j.core.client.Clients">
         <property name="callbackUrl" value="http://localhost:8080/callback" />
         <property name="clients">
@@ -276,6 +279,7 @@
         		<ref bean="samlClient" />
                 <ref bean="parameterClient" />
                 <ref bean="directBasicAuthClient" />
+                <ref bean="anonymousClient" />
         	</list>
         </property>
     </bean>
