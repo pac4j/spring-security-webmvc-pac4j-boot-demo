@@ -28,12 +28,18 @@
 <a href="/logout">logout</a>
 <br /><br />
 <%Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    CommonProfile profile = null;
     List<CommonProfile> profiles = null;
     if (auth != null && auth instanceof Pac4jAuthentication) {
         Pac4jAuthentication token = (Pac4jAuthentication) auth;
+        profile = token.getProfile();
         profiles = token.getProfiles();
     }
 %>
 authentication.name: <%=auth.getName()%><br />
+<br />
+authentication.principal: <%=auth.getPrincipal()%><br />
+<br />
+profile: <%=profile%><br />
 <br />
 profiles: <%=profiles%>
