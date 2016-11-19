@@ -34,4 +34,6 @@
         profiles = token.getProfiles();
     }
 %>
+authentication.name: <%=auth.getName()%><br />
+<br />
 profiles: <%=profiles%>
