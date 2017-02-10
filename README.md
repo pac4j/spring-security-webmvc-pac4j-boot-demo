@@ -1,14 +1,15 @@
-## What is this project ?
+<p align="center">
+  <img src="https://pac4j.github.io/pac4j/img/logo-spring-security.png" width="300" />
+</p>
 
-This **spring-security-pac4j-demo** project is a Java web application to test the [spring-security-pac4j library](https://github.com/pac4j/spring-security-pac4j) with Facebook, Twitter, form authentication, basic auth, CAS...
-The **spring-security-pac4j** library is built to delegate authentication to a provider and be authenticated back in the protected application with a complete user profile retrieved from the provider.
+This `spring-security-pac4j-demo` project is a Spring Security web application to test the [spring-security-pac4j](https://github.com/pac4j/spring-security-pac4j) security library with various authentication mechanisms: Facebook, Twitter, form, basic auth, CAS, SAML...
 
-## Quick start & test
 
-To start quickly, build the project and launch the web app with jetty :
+## Start & test
+
+Build the project and launch the web app with jetty on [http://localhost:8080](http://localhost:8080):
 
     cd spring-security-pac4j-demo
-    mvn clean install jetty:run
+    mvn clean package jetty:run
 
-To test, you can call a protected url by clicking on the "Protected by **xxx** : **xxx**/index.jsp" url, which will start the authentication process with the **xxx** provider.  
-Or you can click on the "Authenticate with **xxx**" link, to start manually the authentication process with the **xxx** provider.
+To test, you can call a protected url by clicking on the "Protected url by **xxx**" link, which will start the authentication process with the **xxx** provider.
