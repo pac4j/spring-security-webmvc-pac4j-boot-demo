@@ -25,7 +25,9 @@
 <br />
 <a href="forceLogin?client_name=FacebookClient">Force Facebook login</a> (even if already authenticated)<br />
 <br />
-<a href="/logout">logout</a>
+<a href="/logout">logout</a><br />
+<a href="/pac4jLogout?url=/?forcepostlogouturl">pac4j local logout</a><br />
+<a href="/pac4jCentralLogout?url=/?forcepostlogouturlafteridp">pac4j central local logout</a>
 <br /><br />
 <%Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     CommonProfile profile = null;
@@ -42,4 +44,6 @@ authentication.principal: <%=auth.getPrincipal()%><br />
 <br />
 profile: <%=profile%><br />
 <br />
-profiles: <%=profiles%>
+profiles: <%=profiles%><br />
+<br />
+session: <%=session.getId()%>

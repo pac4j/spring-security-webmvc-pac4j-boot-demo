@@ -3,9 +3,9 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+          http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
     <security:authentication-manager />
     <bean id="noEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint" />
@@ -142,6 +142,26 @@
     </security:http>
 
 
+    <bean id="pac4jLogoutFilter" class="org.pac4j.springframework.security.web.LogoutFilter">
+        <property name="config" ref="config" />
+        <property name="defaultUrl" value="/?defaulturlafterlogout" />
+        <property name="destroySession" value="true" />
+    </bean>
+    <security:http create-session="never" pattern="/pac4jLogout*" entry-point-ref="noEntryPoint">
+        <security:custom-filter position="BASIC_AUTH_FILTER" ref="pac4jLogoutFilter" />
+    </security:http>
+
+    <bean id="pac4jCentralLogoutFilter" class="org.pac4j.springframework.security.web.LogoutFilter">
+        <property name="config" ref="config" />
+        <property name="defaultUrl" value="http://localhost:8080/?defaulturlafterlogoutafteridp" />
+        <property name="localLogout" value="false" />
+        <property name="centralLogout" value="true" />
+        <property name="logoutUrlPattern" value="http://localhost:8080/.*" />
+    </bean>
+    <security:http create-session="never" pattern="/pac4jCentralLogout*" entry-point-ref="noEntryPoint">
+        <security:custom-filter position="BASIC_AUTH_FILTER" ref="pac4jCentralLogoutFilter" />
+    </security:http>
+
     <bean id="roleAdminSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="FacebookClient" />
@@ -250,8 +270,11 @@
         <constructor-arg name="parameterName" value="token" />
         <constructor-arg name="tokenAuthenticator">
             <bean class="org.pac4j.jwt.credentials.authenticator.JwtAuthenticator">
-                <constructor-arg name="encryptionSecret" value="#{T(org.pac4j.demo.spring.Constants).JWT_SALT}" />
-                <constructor-arg name="signingSecret" value="#{T(org.pac4j.demo.spring.Constants).JWT_SALT}" />
+                <constructor-arg name="signatureConfiguration">
+                    <bean class="org.pac4j.jwt.config.signature.SecretSignatureConfiguration">
+                        <constructor-arg name="secret" value="#{T(org.pac4j.demo.spring.Constants).JWT_SALT}" />
+                    </bean>
+                </constructor-arg>
             </bean>
         </constructor-arg>
         <property name="supportGetRequest" value="true" />
@@ -301,8 +324,8 @@
         <property name="matchers">
             <map>
                 <entry key="excludedPath">
-                    <bean class="org.pac4j.core.matching.ExcludedPathMatcher">
-                        <constructor-arg name="excludePath" value="^/facebook/notprotected\.jsp$" />
+                    <bean class="org.pac4j.core.matching.PathMatcher">
+                        <constructor-arg name="regexpPath" value="^/facebook/notprotected\.jsp$" />
                     </bean>
                 </entry>
             </map>
