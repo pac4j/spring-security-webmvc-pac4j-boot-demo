@@ -22,7 +22,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <springSecurityPac4jVersion>3.1.0-SNAPSHOT</springSecurityPac4jVersion>
+        <springSecurityPac4jVersion>3.1.0</springSecurityPac4jVersion>
         <pac4jVersion>2.3.1</pac4jVersion>
         <spring.version>5.0.7.RELEASE</spring.version>
     </properties>
