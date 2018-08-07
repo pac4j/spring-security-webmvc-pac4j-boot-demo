@@ -204,7 +204,7 @@
         <property name="authorizationGenerator" ref="roleAdminAuthGenerator" />
     </bean>
 
-    <!-- OidcClient -->
+    <!-- OidcClient
     <bean id="mitreidConfigurationClient" class="org.pac4j.oidc.config.OidcConfiguration">
         <property name="clientAuthenticationMethod" value="NONE"/>
         <property name="clientId" value="21c0da5f-40f6-4ff0-bfdb-6803d3b8cee3" />
@@ -216,7 +216,7 @@
 
     <bean id="mitreIdClient" class="org.pac4j.oidc.client.OidcClient">
         <constructor-arg ref="mitreidConfigurationClient"/>
-    </bean>
+    </bean-->
 
 
     <bean id="samlConfig" class="org.pac4j.saml.client.SAML2ClientConfiguration">
@@ -295,7 +295,7 @@
         		<ref bean="facebookClient" />
         		<ref bean="twitterClient" />
         		<ref bean="googleClient" />
-        		<ref bean="mitreIdClient" />
+        		<!--ref bean="mitreIdClient" /-->
         		<ref bean="formClient" />
         		<ref bean="indirectBasicAuthClient" />
         		<ref bean="casClient" />
