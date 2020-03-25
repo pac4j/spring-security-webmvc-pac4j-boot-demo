@@ -2,9 +2,10 @@ package org.pac4j.demo.spring;
 
 import org.pac4j.core.client.Client;
 import org.pac4j.core.config.Config;
-import org.pac4j.core.context.J2EContext;
-import org.pac4j.core.context.Pac4jConstants;
-import org.pac4j.core.exception.HttpAction;
+import org.pac4j.core.context.JEEContext;
+import org.pac4j.core.exception.http.HttpAction;
+import org.pac4j.core.http.adapter.JEEHttpActionAdapter;
+import org.pac4j.core.util.Pac4jConstants;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +25,15 @@ public class ForceLoginFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) resp;
 
-        final J2EContext context = new J2EContext(request, response);
-        final Client client = config.getClients().findClient(request.getParameter(Pac4jConstants.DEFAULT_CLIENT_NAME_PARAMETER));
+        final JEEContext context = new JEEContext(request, response);
+        final Client client = config.getClients().findClient(request.getParameter(Pac4jConstants.DEFAULT_CLIENT_NAME_PARAMETER)).get();
+        HttpAction action;
         try {
-            client.redirect(context);
+            action = (HttpAction) client.getRedirectionAction(context).get();
         } catch (final HttpAction e) {
+            action = e;
         }
+        JEEHttpActionAdapter.INSTANCE.adapt(action, context);
     }
 
     @Override

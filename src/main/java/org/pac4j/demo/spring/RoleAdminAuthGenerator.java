@@ -2,13 +2,15 @@ package org.pac4j.demo.spring;
 
 import org.pac4j.core.authorization.generator.AuthorizationGenerator;
 import org.pac4j.core.context.WebContext;
-import org.pac4j.core.profile.CommonProfile;
+import org.pac4j.core.profile.UserProfile;
 
-public class RoleAdminAuthGenerator implements AuthorizationGenerator<CommonProfile> {
+import java.util.Optional;
+
+public class RoleAdminAuthGenerator implements AuthorizationGenerator {
 
     @Override
-    public CommonProfile generate(final WebContext context, final CommonProfile profile) {
+    public Optional<UserProfile> generate(final WebContext context, final UserProfile profile) {
         profile.addRole("ROLE_ADMIN");
-        return profile;
+        return Optional.of(profile);
     }
 }
