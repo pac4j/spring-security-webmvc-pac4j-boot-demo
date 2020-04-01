@@ -3,9 +3,9 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://www.springframework.org/schema/beans/spring-beans.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-5.3.xsd">
+          http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:authentication-manager />
     <bean id="noEntryPoint" class="org.pac4j.springframework.security.web.Pac4jEntryPoint" />
@@ -119,6 +119,7 @@
     <bean id="jwtSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="ParameterClient" />
+        <property name="matchers" value="securityHeaders" />
     </bean>
     <security:http create-session="never" pattern="/rest-jwt/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="jwtSecurityFilter" />
@@ -128,6 +129,7 @@
     <bean id="dbaSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="DirectBasicAuthClient,ParameterClient" />
+        <property name="matchers" value="securityHeaders" />
     </bean>
     <security:http create-session="never" pattern="/dba/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="dbaSecurityFilter" />
@@ -240,6 +242,7 @@
     <bean id="facebookClient" class="org.pac4j.oauth.client.FacebookClient">
         <property name="key" value="145278422258960" />
         <property name="secret" value="be21409ba8f39b5dae2a7de525484da8" />
+        <property name="callbackUrl" value="https://localhost/callback" />
     </bean>
 
     <bean id="twitterClient" class="org.pac4j.oauth.client.TwitterClient">
