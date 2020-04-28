@@ -24,7 +24,7 @@
         <java.version>1.8</java.version>
         <springSecurityPac4jVersion>5.0.0</springSecurityPac4jVersion>
         <pac4jVersion>4.0.0</pac4jVersion>
-        <spring.version>5.2.5.RELEASE</spring.version>
+        <spring.version>5.2.6.RELEASE</spring.version>
     </properties>
 
     <dependencies>
