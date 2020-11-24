@@ -1,3 +1,4 @@
+<%@page session="false" %>
 <%@page import="org.pac4j.http.client.indirect.*"%>
 <%
    FormClient formClient = (FormClient) application.getAttribute("formClient");

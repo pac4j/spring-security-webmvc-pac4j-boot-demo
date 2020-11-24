@@ -1,3 +1,4 @@
+<%@page session="false" %>
 <%@page import="org.pac4j.springframework.security.authentication.*"%>
 <%@page import="org.springframework.security.core.*"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
@@ -9,7 +10,7 @@
 <a href="facebookadmin/index.jsp">Protected url by Facebook with ROLE_ADMIN: facebookadmin/index.jsp</a> (use a real account)<br />
 <a href="roleadmin/index.html">Protected url by @PreAuthorize("hasRole('ROLE_ADMIN')"): roleadmin/index.html</a><br />
 <a href="facebookcustom/index.jsp">Protected url by Facebook with custom authorizer (= must be a <em>CommonProfile</em> where the username starts with "jle"): facebookcustom/index.jsp</a> (login with form or basic authentication before with jle* username)<br />
-<a href="twitter/index.jsp">Protected url by Twitter: twitter/index.jsp</a> or <a href="twitter/index.jsp?client_name=FacebookClient">by Facebook: twitter/index.jsp?client_name=FacebookClient</a> (use a real account)<br />
+<a href="twitter/index.jsp">Protected url by Twitter: twitter/index.jsp</a> or <a href="twitter/index.jsp?force_client=FacebookClient">by Facebook: twitter/index.jsp?force_client=FacebookClient</a> (use a real account)<br />
 <a href="form/index.jsp">Protected url by form authentication: form/index.jsp</a> (use login = pwd)<br />
 <a href="basicauth/index.jsp">Protected url by indirect basic auth: basicauth/index.jsp</a> (use login = pwd)<br />
 <a href="cas/index.jsp">Protected url by CAS: cas/index.jsp</a> (use login = pwd)<br />
@@ -30,8 +31,8 @@
 <a href="/pac4jCentralLogout?url=/?forcepostlogouturlafteridp">pac4j central local logout</a>
 <br /><br />
 <%Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    CommonProfile profile = null;
-    List<CommonProfile> profiles = null;
+    UserProfile profile = null;
+    List<UserProfile> profiles = null;
     if (auth != null && auth instanceof Pac4jAuthentication) {
         Pac4jAuthentication token = (Pac4jAuthentication) auth;
         profile = token.getProfile();
@@ -46,4 +47,4 @@ profile: <%=profile%><br />
 <br />
 profiles: <%=profiles%><br />
 <br />
-session: <%=session.getId()%>
+session: <%=request.getSession(false)%>

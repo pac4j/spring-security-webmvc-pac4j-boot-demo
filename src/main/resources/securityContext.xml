@@ -119,7 +119,6 @@
     <bean id="jwtSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="ParameterClient" />
-        <property name="matchers" value="securityHeaders" />
     </bean>
     <security:http create-session="never" pattern="/rest-jwt/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="jwtSecurityFilter" />
@@ -129,7 +128,6 @@
     <bean id="dbaSecurityFilter" class="org.pac4j.springframework.security.web.SecurityFilter">
         <property name="config" ref="config" />
         <property name="clients" value="DirectBasicAuthClient,ParameterClient" />
-        <property name="matchers" value="securityHeaders" />
     </bean>
     <security:http create-session="never" pattern="/dba/**" entry-point-ref="noEntryPoint">
         <security:custom-filter position="BASIC_AUTH_FILTER" ref="dbaSecurityFilter" />
@@ -183,7 +181,6 @@
 
     <bean id="callbackFilter" class="org.pac4j.springframework.security.web.CallbackFilter">
         <property name="config" ref="config" />
-        <property name="multiProfile" value="true" />
     </bean>
 
     <security:http pattern="/**" entry-point-ref="casEntryPoint">
@@ -242,7 +239,7 @@
     <bean id="facebookClient" class="org.pac4j.oauth.client.FacebookClient">
         <property name="key" value="145278422258960" />
         <property name="secret" value="be21409ba8f39b5dae2a7de525484da8" />
-        <property name="callbackUrl" value="https://localhost/callback" />
+        <property name="multiProfile" value="true" />
     </bean>
 
     <bean id="twitterClient" class="org.pac4j.oauth.client.TwitterClient">

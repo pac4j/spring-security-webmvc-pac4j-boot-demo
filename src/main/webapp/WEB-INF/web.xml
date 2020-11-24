@@ -7,6 +7,10 @@
 
     <absolute-ordering/>
 
+    <listener>
+        <listener-class>org.pac4j.demo.spring.MySessionListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml,classpath:securityContext.xml</param-value>

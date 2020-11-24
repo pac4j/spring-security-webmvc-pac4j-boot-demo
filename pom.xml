@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pac4j.demos</groupId>
     <artifactId>spring-security-pac4j-demo</artifactId>
-    <version>5.1.0-SNAPSHOT</version>
+    <version>6.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>spring-security-pac4j demo</name>
 
@@ -21,9 +21,9 @@
     </repositories>
 
     <properties>
-        <java.version>1.8</java.version>
-        <springSecurityPac4jVersion>5.1.0</springSecurityPac4jVersion>
-        <pac4jVersion>4.2.0</pac4jVersion>
+        <java.version>11</java.version>
+        <springSecurityPac4jVersion>6.0.0-SNAPSHOT</springSecurityPac4jVersion>
+        <pac4jVersion>5.0.0-SNAPSHOT</pac4jVersion>
         <spring.version>5.3.1</spring.version>
     </properties>
 
@@ -37,6 +37,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-core</artifactId>
+            <version>${pac4jVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
@@ -60,7 +65,7 @@
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-saml-opensamlv3</artifactId>
+            <artifactId>pac4j-saml</artifactId>
             <version>${pac4jVersion}</version>
         </dependency>
         <dependency>
@@ -106,7 +111,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -124,8 +129,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <release>${java.version}</release>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
