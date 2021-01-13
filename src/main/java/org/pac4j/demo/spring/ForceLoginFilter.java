@@ -3,6 +3,7 @@ package org.pac4j.demo.spring;
 import org.pac4j.core.client.Client;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.context.JEEContext;
+import org.pac4j.core.context.session.JEESessionStore;
 import org.pac4j.core.exception.http.HttpAction;
 import org.pac4j.core.http.adapter.JEEHttpActionAdapter;
 import org.pac4j.core.util.Pac4jConstants;
@@ -29,7 +30,7 @@ public class ForceLoginFilter implements Filter {
         final Client client = config.getClients().findClient(request.getParameter(Pac4jConstants.DEFAULT_CLIENT_NAME_PARAMETER)).get();
         HttpAction action;
         try {
-            action = (HttpAction) client.getRedirectionAction(context).get();
+            action = (HttpAction) client.getRedirectionAction(context, JEESessionStore.INSTANCE).get();
         } catch (final HttpAction e) {
             action = e;
         }
