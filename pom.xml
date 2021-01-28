@@ -22,8 +22,8 @@
 
     <properties>
         <java.version>11</java.version>
-        <springSecurityPac4jVersion>6.0.0-SNAPSHOT</springSecurityPac4jVersion>
-        <pac4jVersion>5.0.0-SNAPSHOT</pac4jVersion>
+        <springSecurityPac4jVersion>6.0.0-RC1</springSecurityPac4jVersion>
+        <pac4jVersion>5.0.0-RC1</pac4jVersion>
         <spring.version>5.3.3</spring.version>
     </properties>
 
