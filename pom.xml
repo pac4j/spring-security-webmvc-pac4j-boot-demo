@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pac4j.demos</groupId>
     <artifactId>spring-security-pac4j-demo</artifactId>
-    <version>6.1.0-SNAPSHOT</version>
+    <version>7.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>spring-security-pac4j demo</name>
 
@@ -22,8 +22,8 @@
 
     <properties>
         <java.version>11</java.version>
-        <springSecurityPac4jVersion>6.2.0</springSecurityPac4jVersion>
-        <pac4jVersion>5.3.1</pac4jVersion>
+        <springSecurityPac4jVersion>7.0.0-SNAPSHOT</springSecurityPac4jVersion>
+        <pac4jVersion>5.4.0-SNAPSHOT</pac4jVersion>
         <spring.version>5.3.17</spring.version>
     </properties>
 
@@ -40,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-jee</artifactId>
+            <artifactId>pac4j-javaee</artifactId>
             <version>${pac4jVersion}</version>
         </dependency>
         <dependency>

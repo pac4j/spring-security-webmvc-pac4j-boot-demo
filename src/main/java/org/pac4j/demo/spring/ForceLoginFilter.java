@@ -2,11 +2,11 @@ package org.pac4j.demo.spring;
 
 import org.pac4j.core.client.Client;
 import org.pac4j.core.config.Config;
-import org.pac4j.core.context.JEEContext;
-import org.pac4j.core.context.session.JEESessionStore;
 import org.pac4j.core.exception.http.HttpAction;
-import org.pac4j.core.http.adapter.JEEHttpActionAdapter;
 import org.pac4j.core.util.Pac4jConstants;
+import org.pac4j.jee.context.JEEContext;
+import org.pac4j.jee.context.session.JEESessionStore;
+import org.pac4j.jee.http.adapter.JEEHttpActionAdapter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
