@@ -23,7 +23,7 @@
     <properties>
         <java.version>11</java.version>
         <springSecurityPac4jVersion>7.0.3</springSecurityPac4jVersion>
-        <pac4jVersion>5.4.3</pac4jVersion>
+        <pac4jVersion>5.4.4</pac4jVersion>
         <spring.version>5.3.22</spring.version>
     </properties>
 
