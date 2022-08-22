@@ -1,0 +1,22 @@
+<h1>index</h1>
+<h2>Spring Security:</h2>
+<a href="/login/index.html">Protected URL by login form: login/index.html</a> (use user/user or admin/admin)<br />
+<a href="/admin/index.html">Protected URL by login form and ROLE_ADMIN: admin/index.html</a><br />
+<br />
+<a href="logout">Spring Security logout</a><br />
+
+<h2>pac4j:</h2>
+<a href="/twitter/index.html">Protected URL by Twitter: twitter/index.html</a><br />
+<a href="/cas/index.html">Protected URL by CAS: cas/index.html</a> (use login = pwd) => ROLE_ADMIN<br />
+<a href="/protected/index.html">Protected URL: protected/index.html</a><br />
+<br />
+<a href="/dba/index.html">Protected URL by DirectBasicAuthClient: /dba/index.html</a> (POST the <em>Authorization</em> header with value: <em>Basic amxlbGV1OmpsZWxldQ==</em>)<br />
+<br />
+<a href="/pac4jLogout?url=/?forcepostlogouturl">pac4j (local) logout</a><br />
+
+<h2>Context:</h2>
+<b>Spring security context</b>: {{context}}
+<br /><br />
+<b>pac4j profiles</b>: {{profiles}}
+<br /><br />
+<b>sessionId</b>: {{sessionId}}

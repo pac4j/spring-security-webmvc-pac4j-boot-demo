@@ -1,0 +1,3 @@
+logging.level.org.pac4j: DEBUG
+
+spring.mustache.suffix: .html
