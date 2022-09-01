@@ -29,6 +29,6 @@ public class MvcSecurityConfig implements WebMvcConfigurer {
     }
 
     private SecurityInterceptor buildInterceptor(final String client) {
-        return new SecurityInterceptor(config, client, JEEHttpActionAdapter.INSTANCE);
+        return SecurityInterceptor.build(config, client, JEEHttpActionAdapter.INSTANCE);
     }
 }
