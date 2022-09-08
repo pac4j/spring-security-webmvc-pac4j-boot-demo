@@ -30,7 +30,7 @@
         <java.version>11</java.version>
         <spring-security-pac4j.version>8.0.0</spring-security-pac4j.version>
         <pac4j.version>5.5.0-SNAPSHOT</pac4j.version>
-        <spring-webmvc-pac4j.version>6.1.0-SNAPSHOT</spring-webmvc-pac4j.version>
+        <spring-webmvc-pac4j.version>6.1.0</spring-webmvc-pac4j.version>
     </properties>
 
     <dependencies>
