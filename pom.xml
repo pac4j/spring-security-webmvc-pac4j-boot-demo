@@ -40,7 +40,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-security-pac4j.version>9.0.0-SNAPSHOT</spring-security-pac4j.version>
-        <pac4j.version>5.6.0</pac4j.version>
+        <pac4j.version>5.6.1</pac4j.version>
         <spring-webmvc-pac4j.version>7.0.0-SNAPSHOT</spring-webmvc-pac4j.version>
     </properties>
 
