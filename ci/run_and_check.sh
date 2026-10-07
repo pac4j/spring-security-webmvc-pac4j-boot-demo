@@ -12,7 +12,7 @@ cd ..
 
 # Clean and compile project (package jar)
 echo "📦 Compiling project..."
-mvn clean package -q
+mvn -U clean package -q
 
 # Ensure target directory exists
 mkdir -p target
@@ -40,7 +40,7 @@ APP_PID=$!
 # Wait for server to start (maximum 60 seconds)
 echo "⏳ Waiting for server startup..."
 for i in {1..60}; do
-    if curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 | grep -q "200"; then
+    if curl -s --max-time 60 -o /dev/null -w "%{http_code}" http://localhost:8080 | grep -q "200"; then
         echo "✅ Server started successfully!"
         break
     fi
@@ -56,7 +56,7 @@ done
 
 # Verify application responds correctly
 echo "🔍 Verifying HTTP response..."
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+HTTP_CODE=$(curl -s --max-time 60 -o /dev/null -w "%{http_code}" http://localhost:8080)
 
 if [ "$HTTP_CODE" = "200" ]; then
     echo "✅ Application responds with HTTP 200"
@@ -73,7 +73,7 @@ if [ "$HTTP_CODE" = "200" ]; then
     echo "📍 Following casLink: $CASLINK_URL"
     
     # Follow redirections and capture final URL and response
-    CAS_RESPONSE=$(curl -s -L -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}" "$CASLINK_URL")
+    CAS_RESPONSE=$(curl -s --max-time 60 -L -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}" "$CASLINK_URL")
     CAS_HTTP_CODE=$(echo "$CAS_RESPONSE" | grep "HTTP_CODE:" | cut -d: -f2)
     CAS_FINAL_URL=$(echo "$CAS_RESPONSE" | grep "FINAL_URL:" | cut -d: -f2-)
     CAS_CONTENT=$(echo "$CAS_RESPONSE" | sed '/^FINAL_URL:/d' | sed '/^HTTP_CODE:/d')
@@ -97,7 +97,7 @@ if [ "$HTTP_CODE" = "200" ]; then
 
         # 1) Fetch the login page (keep cookies) and capture the execution token
         echo "⬇️  Fetching CAS login page and capturing execution token..."
-        curl -s -c "$COOKIE_JAR" -b "$COOKIE_JAR" -L "$CAS_FINAL_URL" -o "$CAS_LOGIN_PAGE" -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}\n" > target/cas_login_fetch.meta
+        curl -s --max-time 60 -c "$COOKIE_JAR" -b "$COOKIE_JAR" -L "$CAS_FINAL_URL" -o "$CAS_LOGIN_PAGE" -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}\n" > target/cas_login_fetch.meta
 
         EXECUTION=$(grep -Eo 'name=\"execution\"[^>]*value=\"[^\"]+\"' "$CAS_LOGIN_PAGE" | sed -E 's/.*value=\"([^\"]+)\".*/\1/' | head -n1 || true)
 
@@ -110,7 +110,7 @@ if [ "$HTTP_CODE" = "200" ]; then
 
             # 2) Post credentials to CAS with cookies and follow redirects (do NOT send service explicitly)
             echo "📤 Posting credentials to CAS and following redirects..."
-            CAS_POST_RESPONSE=$(curl -s -c "$COOKIE_JAR" -b "$COOKIE_JAR" -L -o "$CAS_AFTER_LOGIN" -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}" \
+            CAS_POST_RESPONSE=$(curl -s --max-time 60 -c "$COOKIE_JAR" -b "$COOKIE_JAR" -L -o "$CAS_AFTER_LOGIN" -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}" \
                 --data-urlencode "username=leleuj@gmail.com" \
                 --data-urlencode "password=password" \
                 --data-urlencode "execution=$EXECUTION" \
@@ -130,7 +130,7 @@ if [ "$HTTP_CODE" = "200" ]; then
             if echo "$TARGET_URL" | grep -q "/callback"; then
                 TARGET_URL="http://localhost:8080/protected/index.html"
             fi
-            FINAL_META=$(curl -s -c "$COOKIE_JAR" -b "$COOKIE_JAR" -L -o "$FINAL_APP_PAGE" -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}" "$TARGET_URL")
+            FINAL_META=$(curl -s --max-time 60 -c "$COOKIE_JAR" -b "$COOKIE_JAR" -L -o "$FINAL_APP_PAGE" -w "FINAL_URL:%{url_effective}\nHTTP_CODE:%{http_code}" "$TARGET_URL")
             FINAL_URL=$(echo "$FINAL_META" | grep "FINAL_URL:" | cut -d: -f2-)
             FINAL_APP_CODE=$(echo "$FINAL_META" | grep "HTTP_CODE:" | cut -d: -f2)
 
