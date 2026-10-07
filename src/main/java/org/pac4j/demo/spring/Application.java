@@ -4,7 +4,7 @@ import org.pac4j.core.config.Config;
 import org.pac4j.core.exception.http.HttpAction;
 import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.jee.context.JEEContext;
-import org.pac4j.jee.context.session.JEESessionStore;
+import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.jee.http.adapter.JEEHttpActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +28,9 @@ public class Application {
     private JEEContext jeeContext;
 
     @Autowired
+    private SessionStore sessionStore;
+
+    @Autowired
     private ProfileManager profileManager;
 
     @RequestMapping("/")
@@ -39,7 +42,7 @@ public class Application {
     public String index(Map<String, Object> map) throws HttpAction {
         map.put(PROFILES, profileManager.getProfiles());
         map.put(CONTEXT, SecurityContextHolder.getContext());
-        map.put(SESSION_ID, JEESessionStore.INSTANCE.getSessionId(jeeContext, false).orElse("nosession"));
+        map.put(SESSION_ID, sessionStore.getSessionId(jeeContext, false).orElse("nosession"));
         return "index";
     }
 

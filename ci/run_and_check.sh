@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Script to launch spring-webflux-pac4j-boot-demo and verify it works
+# Script to launch spring-security-webmvc-pac4j-boot-demo and verify it works
 # Usage: ./run_and_check.sh
 
 set -e  # Stop script on error
 
-echo "🚀 Starting spring-webflux-pac4j-boot-demo..."
+echo "🚀 Starting spring-security-webmvc-pac4j-boot-demo..."
 
 # Go to project directory (one level up from ci/)
 cd ..
@@ -18,7 +18,7 @@ mvn clean package -q
 mkdir -p target
 
 # Start Spring Boot jar in background
-JAR="target/spring-webflux-pac4j-boot-demo.jar"
+JAR="target/spring-security-webmvc-pac4j-boot-demo.jar"
 if [ ! -f "$JAR" ]; then
   # In case the finalName differs, try to find the produced boot jar
   JAR=$(ls -1 target/*-SNAPSHOT.jar 2>/dev/null | head -n1)
@@ -189,14 +189,14 @@ sleep 2
 kill -9 $APP_PID 2>/dev/null || true
 
 if [ "$HTTP_CODE" = "200" ] && [ "$CAS_TEST_PASSED" = "true" ] && [ "$CAS_AUTH_PASSED" = "true" ]; then
-    echo "🎉 spring-webflux-pac4j-boot-demo test completed successfully!"
+    echo "🎉 spring-security-webmvc-pac4j-boot-demo test completed successfully!"
     echo "✅ All tests passed:"
     echo "   - Application responds with HTTP 200"
     echo "   - CAS link redirects correctly to login page"
     echo "   - CAS login succeeds and demo is reachable"
     exit 0
 else
-    echo "💥 spring-webflux-pac4j-boot-demo test failed!"
+    echo "💥 spring-security-webmvc-pac4j-boot-demo test failed!"
     if [ "$HTTP_CODE" != "200" ]; then
         echo "❌ Application HTTP test failed (code: $HTTP_CODE)"
     fi

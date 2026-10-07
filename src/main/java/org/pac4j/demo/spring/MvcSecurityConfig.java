@@ -1,7 +1,6 @@
 package org.pac4j.demo.spring;
 
 import org.pac4j.core.config.Config;
-import org.pac4j.jee.http.adapter.JEEHttpActionAdapter;
 import org.pac4j.springframework.annotation.AnnotationConfig;
 import org.pac4j.springframework.component.ComponentConfig;
 import org.pac4j.springframework.web.SecurityInterceptor;
@@ -29,6 +28,6 @@ public class MvcSecurityConfig implements WebMvcConfigurer {
     }
 
     private SecurityInterceptor buildInterceptor(final String client) {
-        return SecurityInterceptor.build(config, client, JEEHttpActionAdapter.INSTANCE);
+        return SecurityInterceptor.build(config, client);
     }
 }
