@@ -12,7 +12,7 @@ cd ..
 
 # Clean and compile project (package jar)
 echo "📦 Compiling project..."
-mvn -U clean package -q
+mvn clean package -q
 
 # Ensure target directory exists
 mkdir -p target
